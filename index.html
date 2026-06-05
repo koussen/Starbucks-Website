@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Coffee Company - Craft, Community & Rewards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="brand-logo" onclick="navigateTo('home')">
+                <img src="/src/icon.png">STARBUCKS
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#" class="nav-link active" onclick="navigateTo('home', event)">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" onclick="navigateTo('menu', event)">Menu</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" onclick="navigateTo('locator', event)">Store Locator</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" onclick="navigateTo('rewards', event)">Rewards</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" onclick="navigateTo('about', event)">About</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" onclick="navigateTo('contact', event)">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Light/Dark Theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="btn-cart" onclick="navigateTo('cart')" aria-label="View Shopping Cart">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cartBadgeCount">0</span>
+                </button>
+                <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Open Mobile Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="page-home" class="page active-page">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Where Every Cup Feels Like Magic</h1>
+                    <p>Free drinks. Custom perks. Offers made for you. That's Starbucks Rewards.</p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="navigateTo('menu')">Order Now</button>
+                        <button class="btn btn-secondary" onclick="navigateTo('rewards')">Join Rewards</button>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="/src/starbucks-hero.jpg" alt="Starbucks Signature Drink" class="hero-img">
+                </div>
+            </div>
+
+            <div class="promo-banner">
+                <div class="container">
+                    <h2>Level Up with Double Star Days</h2>
+                    <p>Earn twice the rewards on every single transaction this week. Your dream sip is closer than you think!</p>
+                </div>
+            </div>
+
+            <div class="container section-padding">
+                <h2>Handcrafted For Your Special Taste</h2>
+                <div class="product-grid" id="featuredProductsGrid">
+                    </div>
+            </div>
+
+            <section class="testimonials-section section-padding">
+                <div class="container">
+                    <h2>What Coffee Lovers Are Saying</h2>
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="testimonial-text">"The mobile ordering execution is flawless. My Iced Brown Sugar Oatmilk Shaken Espresso is perfectly mixed and ready the minute I walk in."</p>
+                            <p class="testimonial-author">- Sarah M., Seattle</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="testimonial-text">"Starbucks rewards saves me so much money. I regularly redeem my stars for free merchandise mugs and extra espresso shots!"</p>
+                            <p class="testimonial-author">- David K., Chicago</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                            <p class="testimonial-text">"I love their ethical sourcing commitment. Knowing my morning coffee supports farmers worldwide makes it taste even richer."</p>
+                            <p class="testimonial-author">- Elena R., Austin</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="page-menu" class="page">
+            <div class="container section-padding">
+                <div class="search-bar-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" class="search-input" id="menuSearch" placeholder="Search our signature drinks (e.g., Latte, Frappuccino, Matcha)..." oninput="filterMenu()">
+                </div>
+                <div class="menu-layout">
+                    <aside class="menu-sidebar">
+                        <div class="filter-group">
+                            <h3>Categories</h3>
+                            <button class="filter-btn active" onclick="filterCategory('all', this)">All Products</button>
+                            <button class="filter-btn" onclick="filterCategory('Coffee', this)">Espresso & Coffee</button>
+                            <button class="filter-btn" onclick="filterCategory('Tea', this)">Cold & Hot Teas</button>
+                            <button class="filter-btn" onclick="filterCategory('Frappuccino', this)">Frappuccinos</button>
+                            <button class="filter-btn" onclick="filterCategory('Bakery', this)">Fresh Bakery</button>
+                        </div>
+                    </aside>
+                    <main>
+                        <div class="product-grid" id="menuProductsGrid">
+                            </div>
+                    </main>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-locator" class="page">
+            <div class="container section-padding">
+                <h2>Find Your Nearest Comfort</h2>
+                <div class="form-control" style="max-width: 500px; margin: 0 auto 30px;">
+                    <select id="storeDistanceFilter" onchange="filterStores()">
+                        <option value="all">Show All Nearby Stores</option>
+                        <option value="2">Within 2 miles</option>
+                        <option value="5">Within 5 miles</option>
+                    </select>
+                </div>
+                <div class="locator-layout">
+                    <div class="locator-sidebar" id="storeListContainer">
+                        </div>
+                    <div class="map-placeholder" id="interactiveMap">
+                        <i class="fa-solid fa-map-location-dot" style="font-size: 3.5rem; color: var(--sb-green); margin-bottom: 12px;"></i>
+                        <h3>Interactive Map Engine</h3>
+                        <p style="padding: 0 40px; text-align: center; margin-top: 5px;">Simulating live coordinate tracing. Select a store location to update operational routes.</p>
+                        <div id="mapStatusText" style="margin-top: 15px; font-weight: bold; color: var(--sb-dark-green)"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-rewards" class="page">
+            <div class="rewards-hero">
+                <div class="container">
+                    <h1>Free Coffee is a Click Away</h1>
+                    <p>Join Starbucks Rewards to earn Stars toward free food, drinks, and more.</p>
+                </div>
+            </div>
+            <div class="container section-padding">
+                <h2>Estimate Your Earnings</h2>
+                <div class="calc-box">
+                    <div class="form-control">
+                        <label for="calcSpend">Estimated Monthly Spending ($)</label>
+                        <input type="number" id="calcSpend" value="50" min="1" oninput="calculateStars()">
+                    </div>
+                    <div class="form-control">
+                        <label for="calcPayment">Payment Method</label>
+                        <select id="calcPayment" onchange="calculateStars()">
+                            <option value="2">Starbucks Digital App Wallet (2 Stars per $1)</option>
+                            <option value="1">Cash / Credit / Debit Cards (1 Star per $1)</option>
+                        </select>
+                    </div>
+                    <div style="text-align: center; margin-top: 24px;">
+                        <p style="font-size: 1.1rem;">Estimated Reward Stars Balance:</p>
+                        <h3 style="font-size: 3rem; color: var(--sb-green);", id="starsResult">100 Stars</h3>
+                        <p id="rewardsMilestoneText" style="font-weight: 500; color: var(--sb-muted)"></p>
+                    </div>
+                </div>
+
+                <div style="max-width: 500px; margin: 60px auto 0;">
+                    <h2 style="margin-bottom: 20px;">Create Rewards Profile</h2>
+                    <form id="rewardsSignUpForm" onsubmit="handleRewardsSubmit(event)">
+                        <div class="form-control">
+                            <label>Full Name</label>
+                            <input type="text" required placeholder="Enter first and last name">
+                        </div>
+                        <div class="form-control">
+                            <label>Email Address</label>
+                            <input type="email" required placeholder="name@domain.com">
+                        </div>
+                        <div class="form-control">
+                            <label>Password</label>
+                            <input type="password" required minlength="8" placeholder="Minimum 8 characters">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up & Start Earning</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-about" class="page">
+            <div class="container section-padding" style="max-width: 800px;">
+                <h2 style="text-align: left;">Our Sourcing, Spirit, and Commitment</h2>
+                <p style="font-size: 1.15rem; margin-bottom: 24px;">Since 1971, Starbucks Coffee Company has been committed to ethically sourcing and roasting high-quality arabica coffee. Today, with stores around the globe, the company is the premier roaster and retailer of specialty coffee in the world.</p>
+                <div style="background-color: var(--sb-light-green); padding: 30px; border-radius: 8px; margin-bottom: 30px;">
+                    <h3 style="color: var(--sb-dark-green)"><i class="fa-solid fa-leaf"></i> People & Planet Positive</h3>
+                    <p>We are striving to become resource positive—storing more carbon than we emit, eliminating waste, and providing cleaner, sustainably sourced water back into regional agricultural hubs.</p>
+                </div>
+                <h3>Our Foundational Mission</h3>
+                <blockquote style="border-left: 5px solid var(--sb-green); padding-left: 20px; font-style: italic; font-size: 1.2rem; margin: 20px 0;">
+                    "To inspire and nurture the human spirit – one person, one cup and one neighborhood at a time."
+                </blockquote>
+            </div>
+        </section>
+
+        <section id="page-contact" class="page">
+            <div class="container section-padding" style="max-width: 600px;">
+                <h2>Get In Touch With Customer Support</h2>
+                <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                    <div class="form-control">
+                        <label>What's on your mind?</label>
+                        <select required>
+                            <option value="">Select a topic...</option>
+                            <option value="card">Starbucks Cards & App Issues</option>
+                            <option value="store">In-Store Retail Experience</option>
+                            <option value="rewards">Rewards Membership Inquiries</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label>Your Name</label>
+                        <input type="text" required placeholder="Alex Mercer">
+                    </div>
+                    <div class="form-control">
+                        <label>Your Email</label>
+                        <input type="email" required placeholder="alex@domain.com">
+                    </div>
+                    <div class="form-control">
+                        <label>Detailed Explanation</label>
+                        <textarea rows="5" required placeholder="Please describe your experience or question comprehensively..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Transmit Message</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="page-cart" class="page">
+            <div class="container section-padding">
+                <h2>Your Order Architecture</h2>
+                <div class="cart-layout">
+                    <div id="cartItemsContainer" class="cart-items-list">
+                        </div>
+                    <div class="order-summary">
+                        <h3 style="margin-bottom: 20px;">Order Summary</h3>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="summarySubtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Estimated Sales Tax</span>
+                            <span id="summaryTax">$0.00</span>
+                        </div>
+                        <hr style="margin-bottom: 16px; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
+                        <div class="summary-row" style="font-weight: 700; font-size: 1.2rem;">
+                            <span>Total Due</span>
+                            <span id="summaryTotal">$0.00</span>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 20px; padding: 14px;" onclick="simulateCheckout()">Proceed to Digital Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="modal-overlay" id="quickViewModal">
+        <div class="modal-body">
+            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div id="modalContent">
+                </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="exitIntentPopup">
+        <div class="modal-body" style="max-width: 450px;">
+            <button class="modal-close" onclick="closeExitPopup()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="exit-popup-content">
+                <i class="fa-solid fa-gift"></i>
+                <h2>Don't Walk Away Empty Handed!</h2>
+                <p style="margin-bottom: 20px;">Sign up to our newsletter database right now and get a **15% discount voucher** applied directly to your profile account ecosystem.</p>
+                <form onsubmit="handleNewsletterSubmit(event, true)">
+                    <input type="email" required placeholder="Enter email address" style="width:100%; padding:12px; margin-bottom:12px; border-radius:4px; border:1px solid #ccc;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Claim My Voucher</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#" onclick="navigateTo('about')">Our Heritage</a></li>
+                        <li><a href="#" onclick="navigateTo('about')">Coffeehouse Culture</a></li>
+                        <li><a href="#" onclick="navigateTo('about')">Sustainability Commitments</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Rewards System</h4>
+                    <ul>
+                        <li><a href="#" onclick="navigateTo('rewards')">Star Options</a></li>
+                        <li><a href="#" onclick="navigateTo('rewards')">Terms & Legal Rules</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Customer Support</h4>
+                    <ul>
+                        <li><a href="#" onclick="navigateTo('contact')">Contact Forms</a></li>
+                        <li><a href="#" onclick="navigateTo('locator')">Find Store Location</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Stay Connected</h4>
+                    <p style="font-size: 0.85rem; color: #B5B5B5;">Receive localized alerts, early product arrivals, and premium rewards info directly inside your inbox.</p>
+                    <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event, false)">
+                        <input type="email" required placeholder="Enter email address">
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Starbucks Coffee Company. All rights reserved structural models.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
